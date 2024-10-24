@@ -168,14 +168,14 @@ def balanceSheet(request, userId=None):
     if request.method == 'GET':
         try:
             if userId:
-                individualExpensesUrl = reverse('get_individual_expenses', args=[userId])
+                individualExpensesUrl = reverse('listExpenses', args=[userId])
                 individualExpensesResponse = requests.get(f"{BASE_URL}{individualExpensesUrl}")  # Call Individual Expense
                 individualExpensesResponse.raise_for_status()
                 individualExpenses = individualExpensesResponse.json()
             else:
                 individualExpenses = {'expenses': []}
 
-            overallExpensesUrl = reverse('get_overall_expenses')
+            overallExpensesUrl = reverse('getOverallExpenses')
             overallExpensesResponse = requests.get(f"{BASE_URL}{overallExpensesUrl}")  # Call Overall Expense
             overallExpensesResponse.raise_for_status()
             overallExpenses = overallExpensesResponse.json()
